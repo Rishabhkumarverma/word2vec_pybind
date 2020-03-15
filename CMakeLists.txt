@@ -25,7 +25,7 @@ message("\nThe following variables are derived from the values of the previous v
 find_path(_PYTHON2_INC_DIR Python.h HINTS ${PYTHON_ROOT} PATH_SUFFIXES python2.7)
 set_ifndef(PYTHON2_INC_DIR ${_PYTHON2_INC_DIR})
 
-find_path(_PYTHON3_INC_DIR Python.h HINTS ${PYTHON_ROOT} PATH_SUFFIXES  python3.5 )
+find_path(_PYTHON3_INC_DIR Python.h HINTS ${PYTHON_ROOT} PATH_SUFFIXES  python3.7 python3.6 python3.5)
 set_ifndef(PYTHON3_INC_DIR ${_PYTHON3_INC_DIR})
 
 # -------- BUILDING --------
