@@ -8,7 +8,7 @@
 #include"word2vec.hpp"
 
 
-class CPyProfiler
+class CWord2Vec
 {
 public:
 void readFile(const std::string &_fileName, std::string &_data);
@@ -18,7 +18,7 @@ int myadd(int a , int b){return(a+b);}
 };
 
 
-void CPyProfiler::readFile(const std::string &_fileName, std::string &_data) {
+void CWord2Vec::readFile(const std::string &_fileName, std::string &_data) {
     std::ifstream ifs;
     ifs.exceptions(std::ifstream::failbit | std::ifstream::badbit);
     ifs.open(_fileName.c_str());
@@ -30,7 +30,7 @@ void CPyProfiler::readFile(const std::string &_fileName, std::string &_data) {
     ifs.close();
 }
 
-int CPyProfiler::run(const std::string modelname, const std::string filename)
+int CWord2Vec::run(const std::string modelname, const std::string filename)
 {
 
 // load wor2vec model
