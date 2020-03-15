@@ -16,7 +16,7 @@ set_ifndef(PY_MODULE_NAME word2vec)
 set(CMAKE_CXX_STANDARD 11)
 # pybind11 defaults to c++14.
 set(PYBIND11_CPP_STANDARD -std=c++11)
-set_ifndef(PYBIND11_DIR $ENV{HOME}/pybind11/)
+set_ifndef(PYBIND11_DIR pybind11/)
 # Find dependencies.
 message("\nThe following variables are derived from the values of the previous variables unless provided explicitly:\n")
 
