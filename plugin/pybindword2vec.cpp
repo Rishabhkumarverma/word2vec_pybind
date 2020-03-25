@@ -13,6 +13,7 @@ PYBIND11_MODULE(word2vec, m)
       .def("loadDoc2VecModel", &CWord2Vec::loadDoc2VecModel)
       .def("saveDoc2VecModel", &CWord2Vec::saveDoc2VecModel)
       .def("doc2vector", &CWord2Vec::convertDoc2Vec)
+      //.def("doc2vecmap", &CWord2Vec::getMapData)
       .def("doc2vectorSimilarity", &CWord2Vec::Doc2VecSimilarity);
       //.def(py::init<PyProfiler::reportLayerTime_t>());
 }

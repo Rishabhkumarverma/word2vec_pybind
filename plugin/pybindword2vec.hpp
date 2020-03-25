@@ -17,11 +17,13 @@ std::unique_ptr<w2v::d2vModel_t> d2vModel;
 std::vector<std::pair<std::size_t, float>> nearest;
 void readFile(const std::string &_fileName, std::string &_data);
 public:
+//std::unordered_map<long unsigned int, std::vector<float>> getMapData();
 //CWord2Vec(const std::string &_fileName); 
 int loadWord2Vec(const std::string &_fileName);
 int loadDoc2VecModel(const std::string &_fileName);
 void saveDoc2VecModel(const std::string outfilename);
-int convertDoc2Vec(const std::string filename,int id);
+int convertDoc2Vecv1(const std::string filename, int id);
+std::vector<float> convertDoc2Vec(const std::string filename);
 std::vector<std::pair<std::size_t, float>> Doc2VecSimilarity(const std::string filename, int max_nearest_vec);
 int myadd(int a , int b){return(a+b);}
     
@@ -60,6 +62,10 @@ int CWord2Vec::loadWord2Vec(const std::string &_fileName){
    return 0;
 }
 
+//std::unordered_map<long unsigned int, std::vector<float>> CWord2Vec::getMapData(){
+//auto data = this->d2vModel->map();
+//return data;
+//}
 
 int CWord2Vec::loadDoc2VecModel(const std::string &_fileName){
    try {
@@ -97,7 +103,7 @@ void CWord2Vec::saveDoc2VecModel(const std::string outfilename){
         }
 }
 
-int CWord2Vec::convertDoc2Vec(const std::string filename, int id)
+int CWord2Vec::convertDoc2Vecv1(const std::string filename, int id)
 {       
        
        try {
@@ -117,6 +123,28 @@ int CWord2Vec::convertDoc2Vec(const std::string filename, int id)
     }
      
  return 0;
+}
+
+std::vector<float> CWord2Vec::convertDoc2Vec(const std::string filename)
+{       
+       std::vector<float> data;
+       try {
+        std::string fileText ;
+        this->readFile(std::string(filename), fileText);
+        //  text to vector
+        w2v::doc2vec_t doc2vec(this->w2vModel, fileText);
+        data= static_cast<std::vector<float>> (doc2vec);
+        this->d2vModel->set(0, doc2vec);
+
+    } catch (const std::exception &_e) {
+        std::cerr << _e.what() << std::endl;
+        return data;
+    } catch (...) {
+        std::cerr << "unknown error" << std::endl;
+        return data;
+    }
+     
+ return data;
 }
 
 std::vector<std::pair<std::size_t, float>> CWord2Vec::Doc2VecSimilarity(const std::string filename, int max_nearest_vec)
